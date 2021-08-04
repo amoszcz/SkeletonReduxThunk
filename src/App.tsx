@@ -1,17 +1,17 @@
 import React from 'react';
 import './App.css';
-import { Tickets } from './features/Tickets/components/Tickets';
+import {LoadingPanel} from './features/LoadingPanel/components/LoadingPanel';
+import {Tickets} from './features/Tickets/components/Tickets';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-       <Tickets />
-      
-        
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+            <header className="App-header">
+                <Tickets/>
+                <LoadingPanel/>
+            </header>
+        </div>
+    );
 }
 
 export default App;
