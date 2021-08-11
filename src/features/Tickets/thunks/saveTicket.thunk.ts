@@ -1,5 +1,5 @@
 import {AppThunk} from "../../../app/store";
-import {saveTicket} from "../store/Tickets.store";
+import {saveTicket, setFocusAddButtonRequired} from "../store/Tickets.store";
 import {waitASecond} from "../../../mocks/Mocks";
 import {hideLoadingPanel, showLoadingPanel} from "../../LoadingPanel/store/LoadingPanel.state";
 
@@ -10,4 +10,5 @@ export const saveTicketThunk:  ()=>AppThunk = () =>  ( async (dispatch,getState)
     await simulateSaveToBackend();
     dispatch(hideLoadingPanel());
     dispatch(saveTicket(editedTicket));
-})
+    dispatch(setFocusAddButtonRequired(true));
+});

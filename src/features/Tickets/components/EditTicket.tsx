@@ -12,7 +12,7 @@ const EditTicketComponent: FC<EditTicketProps> = ({}) => {
     const dispatch = useDispatch();
     return <>
         {showEdit && <>
-            Nazwa: <input value={editedTicket.name} onChange={e => {
+            Nazwa: <input autoFocus={true} value={editedTicket.name} onChange={e => {
             dispatch(changeTicketName(e.target.value));
         }
         }/>

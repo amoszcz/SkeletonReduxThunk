@@ -11,6 +11,7 @@ export interface TicketsState {
     tickets: Ticket[];
     editedTicket: Ticket;
     showEdit:boolean;
+    focusAddButtonRequired:boolean;
 }
 
 export const initialTicketsState = {
@@ -18,7 +19,9 @@ export const initialTicketsState = {
         name: 'First Ticket',
         content: 'Add more tickets'
     }],
-    editedTicket: EmptyTicket
+    editedTicket: EmptyTicket,
+    showEdit:false,
+    focusAddButtonRequired:false
 } as TicketsState;
 export const ticketsSlice = createSlice({
     name: 'TicketsState',
@@ -38,6 +41,9 @@ export const ticketsSlice = createSlice({
             state.showEdit = true;
             state.editedTicket = EmptyTicket;
         }),
+        setFocusAddButtonRequired:((state,action:PayloadAction<boolean>) => {
+            state.focusAddButtonRequired = action.payload;
+        })
     },
     initialState: initialTicketsState,
 });
@@ -46,3 +52,4 @@ export const saveTicket = ticketsSlice.actions.saveTicket;
 export const changeTicketContent = ticketsSlice.actions.changeTicketContent;
 export const changeTicketName = ticketsSlice.actions.changeTicketName;
 export const startNewTicketEdit = ticketsSlice.actions.startNewTicketEdit;
+export const setFocusAddButtonRequired = ticketsSlice.actions.setFocusAddButtonRequired;
