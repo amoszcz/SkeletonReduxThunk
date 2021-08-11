@@ -1,11 +1,14 @@
 import React, { FC } from 'react';
 import { Ticket } from '../store/Tickets.store';
+import { useDispatch } from 'react-redux';
+import { deleteTicketCommand } from '../thunks/deleteTicket.thunk';
 
 interface TicketElementProps {
     ticket: Ticket;
 }
 
 const TicketElementComponent: FC<TicketElementProps> = ({ ticket }) => {
+    const dispatch = useDispatch();
     return (
         <>
             <div
@@ -25,6 +28,13 @@ const TicketElementComponent: FC<TicketElementProps> = ({ ticket }) => {
                     <label></label>
                     <span>{ticket.content}</span>
                 </span>
+                <button
+                    onClick={() => {
+                        dispatch(deleteTicketCommand(ticket.guid));
+                    }}
+                >
+                    Usuń
+                </button>
             </div>
         </>
     );

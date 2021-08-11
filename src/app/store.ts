@@ -3,15 +3,18 @@ import { configureStore, ThunkAction, Action, applyMiddleware, combineReducers, 
 import thunk from 'redux-thunk';
 import { ticketsSlice, TicketsState } from '../features/Tickets/store/Tickets.store';
 import { loadingPanelSlice, LoadingPanelState } from '../features/LoadingPanel/store/LoadingPanel.state';
+import { confirmReducer, ConfirmState } from '../features/Confirm/store/Confirm.store';
 
 export interface AppState {
     ticketsState: TicketsState;
     loadingPanelState: LoadingPanelState;
+    confirmState: ConfirmState;
 }
 
 export const appStateReducer = combineReducers<AppState, TypeThunkAction>({
     ticketsState: ticketsSlice.reducer,
     loadingPanelState: loadingPanelSlice.reducer,
+    confirmState: confirmReducer,
 });
 export const store = configureStore<AppState, TypeThunkAction>({
     reducer: appStateReducer,

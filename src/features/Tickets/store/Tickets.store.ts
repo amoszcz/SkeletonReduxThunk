@@ -1,8 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Guid } from '../../../app/guid';
 
 export interface Ticket {
     name: string;
     content: string;
+    guid: Guid;
 }
 
 export const EmptyTicket = { content: '', name: '' } as Ticket;
@@ -19,6 +21,7 @@ export const initialTicketsState = {
         {
             name: 'First Ticket',
             content: 'Add more tickets',
+            guid: Guid.NewGuid(),
         },
     ],
     editedTicket: EmptyTicket,
@@ -41,16 +44,21 @@ export const ticketsSlice = createSlice({
         },
         startNewTicketEdit: (state) => {
             state.showEdit = true;
-            state.editedTicket = EmptyTicket;
+            state.editedTicket = { ...EmptyTicket, guid: Guid.NewGuid() };
         },
         setFocusAddButtonRequired: (state, action: PayloadAction<boolean>) => {
             state.focusAddButtonRequired = action.payload;
+        },
+        removeTicket: (state, action: PayloadAction<Guid>) => {
+            const ticketIndex = state.tickets.findIndex((el) => el.guid === action.payload);
+            if (ticketIndex > -1) state.tickets.splice(ticketIndex, 1);
         },
     },
     initialState: initialTicketsState,
 });
 
 export const saveTicket = ticketsSlice.actions.saveTicket;
+export const removeTicket = ticketsSlice.actions.removeTicket;
 export const changeTicketContent = ticketsSlice.actions.changeTicketContent;
 export const changeTicketName = ticketsSlice.actions.changeTicketName;
 export const startNewTicketEdit = ticketsSlice.actions.startNewTicketEdit;
