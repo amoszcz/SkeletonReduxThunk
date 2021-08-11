@@ -1,17 +1,17 @@
-import {configureStore, ThunkAction, Action, applyMiddleware, combineReducers, createStore} from '@reduxjs/toolkit';
+import { configureStore, ThunkAction, Action, applyMiddleware, combineReducers, createStore } from '@reduxjs/toolkit';
 
-import thunk from "redux-thunk";
-import {ticketsSlice, TicketsState} from "../features/Tickets/store/Tickets.store";
-import {loadingPanelSlice, LoadingPanelState} from "../features/LoadingPanel/store/LoadingPanel.state";
+import thunk from 'redux-thunk';
+import { ticketsSlice, TicketsState } from '../features/Tickets/store/Tickets.store';
+import { loadingPanelSlice, LoadingPanelState } from '../features/LoadingPanel/store/LoadingPanel.state';
 
 export interface AppState {
-    ticketsState:TicketsState;
-    loadingPanelState:LoadingPanelState;
+    ticketsState: TicketsState;
+    loadingPanelState: LoadingPanelState;
 }
 
-export const appStateReducer = combineReducers<AppState,TypeThunkAction>({    
-    ticketsState:ticketsSlice.reducer,
-    loadingPanelState:loadingPanelSlice.reducer
+export const appStateReducer = combineReducers<AppState, TypeThunkAction>({
+    ticketsState: ticketsSlice.reducer,
+    loadingPanelState: loadingPanelSlice.reducer,
 });
 export const store = configureStore<AppState, TypeThunkAction>({
     reducer: appStateReducer,
@@ -24,4 +24,3 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppState, unkn
 export interface TypeThunkAction extends AppThunk {
     type: void;
 }
-
